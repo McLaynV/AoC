@@ -37,6 +37,9 @@ class Direction:
             right=self.right + other.right,
         )
 
+    def __hash__(self):
+        return hash((self.down, self.right))
+
     def turn_back(self) -> Direction:
         return Direction(down=-self.down, right=-self.right)
 
@@ -59,8 +62,8 @@ class DirectionUnit(Direction, Enum):
             right: int,
     ) -> DirectionUnit:
         obj = object.__new__(cls)
-        obj.down = down
-        obj.right = right
+        obj._down = down
+        obj._right = right
         return obj
 
     def turn_back(self) -> DirectionUnit:
@@ -117,12 +120,13 @@ class Map(Generic[GenericTile]):
         for row in self._grid:
             assert expected_width == len(row)
 
-    @staticmethod
+    @classmethod
     def load_from_chars(
+            cls,
             map_grid: Iterable[Iterable[str]],
             tile_getter: Callable[[str], GenericTile] = GenericTile,
             strip_rows: bool = False,
-    ) -> Map:
+    ) -> GenericMap:
         if strip_rows:
             def strip(row: Iterable[str]) -> Iterable[str]:
                 for item in row:
@@ -131,15 +135,16 @@ class Map(Generic[GenericTile]):
         else:
             strip = lambda x: x
 
-        return Map([[tile_getter(tile) for tile in strip(row)] for row in map_grid])
+        return cls([[tile_getter(tile) for tile in strip(row)] for row in map_grid])
 
-    @staticmethod
+    @classmethod
     def load_from_file(
+            cls,
             file_path: str,
             tile_getter: Callable[[str], GenericTile] = GenericTile,
-    ) -> Map:
+    ) -> GenericMap:
         with open(file_path) as file:
-            return Map.load_from_chars(file, tile_getter, strip_rows=True)
+            return cls.load_from_chars(file, tile_getter, strip_rows=True)
 
     @property
     def height(self) -> int:
@@ -192,3 +197,6 @@ class Map(Generic[GenericTile]):
         return "\n".join(["".join([
             repr(item) for item in row
         ]) for row in self._grid])
+
+
+GenericMap = TypeVar('GenericMap', bound=Map)
