@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
-from ...expectations_check import validate_result
-from ...map_loader import Map, Tile, DirectionUnit
+from expectations_check import validate_result
+from map_loader import Map, Tile, DirectionUnit
 
 
 class LabPlace(Enum):
@@ -64,5 +64,5 @@ def part_1(
 
 
 if __name__ == '__main__':
-    print(part_1("example.txt", expected_result=41))
-    print(part_1("input.txt"))
+    part_1("example.txt", expected_result=41)
+    part_1("input.txt", expected_result=4580)
