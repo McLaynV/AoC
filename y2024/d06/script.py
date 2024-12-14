@@ -4,8 +4,9 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from enum import Enum
 
+from coordinates import Coordinates, DirectionUnit
 from expectations_check import validate_result
-from map_loader import Map, Tile, DirectionUnit, Coordinates
+from map_loader import Map, Tile
 
 
 class LabPlace(Enum):
