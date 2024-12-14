@@ -103,5 +103,10 @@ class Map(Generic[GenericTile]):
             repr(item) for item in row
         ]) for row in self._grid])
 
+    def all_tiles(self) -> Generator[GenericTile, None, None]:
+        for row in self._grid:
+            for item in row:
+                yield item
+
 
 GenericMap = TypeVar('GenericMap', bound=Map)
