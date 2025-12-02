@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import itertools
-import math
 from typing import Generator
 
 from expectations_check import validate_result
@@ -10,37 +9,49 @@ from expectations_check import validate_result
 
 @dataclass()
 class InvalidId:
-    half: int
+    part: int
+    repetitions: int
 
     def __str__(self) -> str:
-        return f"{self.half}{self.half}"
+        return str(self.part) * self.repetitions
 
     def __int__(self) -> int:
         return int(str(self))
 
     def increase(self) -> None:
-        self.half += 1
+        self.part += 1
 
     @classmethod
-    def get_first_in_interval(cls, interval: Interval) -> InvalidId | None:
+    def get_first_in_interval(cls, interval: Interval, repetitions: int) -> InvalidId | None:
         start_str = str(interval.start)
         length = len(start_str)
-        half_length = math.floor(length / 2)
-        if length % 2 == 0:
-            # even length
-            invalid_id = InvalidId(half=int(start_str[:half_length]))
+        part_length = length // repetitions
+        if length % repetitions == 0:
+            invalid_id = InvalidId(part=int(start_str[:part_length]), repetitions=repetitions)
             if invalid_id in interval:
                 return invalid_id
             # was too small
             invalid_id.increase()
         else:
-            # odd length
-            invalid_id = InvalidId(half=int("1" + ("0" * half_length)))
+            # length not matching
+            invalid_id = InvalidId(part=int("1" + ("0" * part_length)), repetitions=repetitions)
 
         if invalid_id in interval:
             return invalid_id
         # was too big
         return None
+
+    @classmethod
+    def get_all_in_interval(cls, interval: Interval) -> set[int]:
+        result = set()
+        for repetitions in range(2, len(str(interval.end)) + 1):
+            invalid_id = cls.get_first_in_interval(interval, repetitions)
+            if invalid_id is None:
+                continue
+            while invalid_id in interval:
+                result.add(int(invalid_id))
+                invalid_id.increase()
+        return result
 
 
 @dataclass()
@@ -70,10 +81,11 @@ def produce_intervals(file_name: str) -> Generator[Interval, None, None]:
 
 
 @validate_result
-def sum_invalid_ids(file_name: str) -> int:
+def part1(file_name: str) -> int:
     result = 0
     for interval in produce_intervals(file_name):
-        invalid_id = InvalidId.get_first_in_interval(interval)
+
+        invalid_id = InvalidId.get_first_in_interval(interval, 2)
         if invalid_id is None:
             continue
         while invalid_id in interval:
@@ -82,9 +94,20 @@ def sum_invalid_ids(file_name: str) -> int:
     return result
 
 
+@validate_result
+def part2(file_name: str) -> int:
+    result = 0
+    for interval in produce_intervals(file_name):
+        for invalid_id in InvalidId.get_all_in_interval(interval):
+            result += invalid_id
+    return result
+
+
 def main():
-    print(sum_invalid_ids("example.txt", expected_result=1227775554))
-    print(sum_invalid_ids("input.txt", expected_result=19605500130))
+    print(part1("example.txt", expected_result=1227775554))
+    print(part1("input.txt", expected_result=19605500130))
+    print(part2("example.txt", expected_result=4174379265))
+    print(part2("input.txt", expected_result=36862281418))
 
 
 if __name__ == "__main__":
