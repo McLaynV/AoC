@@ -1,19 +1,18 @@
 from __future__ import annotations
 
+from abc import ABC, abstractmethod
+from typing import Iterable, Callable, Generator, TypeVar
+
 from coordinates import Coordinates
 
-from typing import Iterable, Callable, Generator, TypeVar, Generic
 
-
-class Tile:
+class Tile(ABC):
+    @abstractmethod
     def __repr__(self) -> str:
         return " "
 
 
-GenericTile = TypeVar('GenericTile', bound=Tile)
-
-
-class Map(Generic[GenericTile]):
+class Map[GenericTile: Tile]:
     def __init__(
             self,
             map_grid: list[list[GenericTile]],
@@ -99,9 +98,13 @@ class Map(Generic[GenericTile]):
         return sum(1 for _ in self.find_items_by_criteria(criteria))
 
     def __repr__(self) -> str:
-        return "\n".join(["".join([
-            repr(item) for item in row
-        ]) for row in self._grid])
+        return "\n".join(
+            "".join(
+                repr(item)
+                for item in row
+            )
+            for row in self._grid
+        )
 
     def all_tiles(self) -> Generator[GenericTile, None, None]:
         for row in self._grid:

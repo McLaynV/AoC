@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-from enum import Enum
+from dataclasses import dataclass, field
+from enum import Enum, StrEnum
 
 from coordinates import Coordinates, DirectionUnit
 from expectations_check import validate_result
 from map_loader import Map, Tile
 
 
-class LabPlace(Enum):
+class LabPlace(StrEnum):
     BLOCK = "#"
     EMPTY = "."
     START = "^"
@@ -20,14 +21,11 @@ class LabPlace(Enum):
         raise ValueError(f"Unexpected tile character: {tile_character}")
 
 
+@dataclass
 class LabTile(Tile):
-    def __init__(
-            self,
-            lab_place: LabPlace,
-    ):
-        self.lab_place = lab_place
-        self._visited_directions_main: set[DirectionUnit] = set()
-        self._visited_directions_loop_check: set[DirectionUnit] = set()
+    lab_place: LabPlace
+    _visited_directions_main: set[DirectionUnit] = field(default_factory=set)
+    _visited_directions_loop_check: set[DirectionUnit] = field(default_factory=set)
 
     def clean_loop_search(self) -> None:
         self._visited_directions_loop_check.clear()
