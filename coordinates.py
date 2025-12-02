@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 
-@dataclass
+@dataclass(frozen=True)
 class Coordinates:
     from_top: int
     from_left: int
@@ -16,7 +16,7 @@ class Coordinates:
         )
 
 
-@dataclass
+@dataclass(frozen=True)
 class Direction:
     down: int = 0
     right: int = 0
@@ -35,8 +35,8 @@ class Direction:
             right=self.right + other.right,
         )
 
-    def __hash__(self):
-        return hash((self.down, self.right))
+    def __neg__(self) -> Direction:
+        return self.turn_back()
 
     def turn_back(self) -> Direction:
         return Direction(down=-self.down, right=-self.right)
@@ -60,9 +60,14 @@ class DirectionUnit(Direction, Enum):
             right: int,
     ) -> DirectionUnit:
         obj = object.__new__(cls)
-        obj._down = down
-        obj._right = right
+        obj.__init__(down, right)
         return obj
+
+    def __init__(self, down: int, right: int):
+        super().__init__(down, right)
+
+    def __neg__(self) -> DirectionUnit:
+        return self.turn_back()
 
     def turn_back(self) -> DirectionUnit:
         match self:
