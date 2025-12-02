@@ -21,38 +21,6 @@ class InvalidId:
     def increase(self) -> None:
         self.part += 1
 
-    @classmethod
-    def get_first_in_interval(cls, interval: Interval, repetitions: int) -> InvalidId | None:
-        start_str = str(interval.start)
-        length = len(start_str)
-        part_length = length // repetitions
-        if length % repetitions == 0:
-            invalid_id = InvalidId(part=int(start_str[:part_length]), repetitions=repetitions)
-            if invalid_id in interval:
-                return invalid_id
-            # was too small
-            invalid_id.increase()
-        else:
-            # length not matching
-            invalid_id = InvalidId(part=int("1" + ("0" * part_length)), repetitions=repetitions)
-
-        if invalid_id in interval:
-            return invalid_id
-        # was too big
-        return None
-
-    @classmethod
-    def get_all_in_interval(cls, interval: Interval) -> set[int]:
-        result = set()
-        for repetitions in range(2, len(str(interval.end)) + 1):
-            invalid_id = cls.get_first_in_interval(interval, repetitions)
-            if invalid_id is None:
-                continue
-            while invalid_id in interval:
-                result.add(int(invalid_id))
-                invalid_id.increase()
-        return result
-
 
 @dataclass()
 class Interval:
@@ -70,6 +38,42 @@ class Interval:
         return self.start <= item <= self.end
 
 
+def get_first_invalid_id_in_interval_or_smaller(
+        interval: Interval,
+        repetitions: int,
+) -> InvalidId:
+    start_str = str(interval.start)
+    length = len(start_str)
+    part_length = length // repetitions
+    if length % repetitions == 0:
+        part_str = start_str[:part_length]
+    else:
+        part_str = "1" + ("0" * part_length)
+    return InvalidId(part=int(part_str), repetitions=repetitions)
+
+
+def get_all_invalid_ids_with_fixed_repetitions_in_interval(
+        interval: Interval,
+        repetitions: int,
+) -> set[int]:
+    result = set()
+    invalid_id = get_first_invalid_id_in_interval_or_smaller(interval, repetitions)
+    while int(invalid_id) < interval.start:
+        invalid_id.increase()
+    while invalid_id in interval:
+        result.add(int(invalid_id))
+        invalid_id.increase()
+    return result
+
+
+def get_all_invalid_ids_in_interval(interval: Interval) -> set[int]:
+    result = set()
+    for repetitions in range(2, len(str(interval.end)) + 1):
+        invalid_ids = get_all_invalid_ids_with_fixed_repetitions_in_interval(interval, repetitions)
+        result |= invalid_ids
+    return result
+
+
 def produce_intervals(file_name: str) -> Generator[Interval, None, None]:
     with open(file_name) as f:
         interval_strings = itertools.chain.from_iterable(
@@ -84,13 +88,9 @@ def produce_intervals(file_name: str) -> Generator[Interval, None, None]:
 def part1(file_name: str) -> int:
     result = 0
     for interval in produce_intervals(file_name):
-
-        invalid_id = InvalidId.get_first_in_interval(interval, 2)
-        if invalid_id is None:
-            continue
-        while invalid_id in interval:
+        invalid_ids = get_all_invalid_ids_with_fixed_repetitions_in_interval(interval, 2)
+        for invalid_id in invalid_ids:
             result += int(invalid_id)
-            invalid_id.increase()
     return result
 
 
@@ -98,16 +98,16 @@ def part1(file_name: str) -> int:
 def part2(file_name: str) -> int:
     result = 0
     for interval in produce_intervals(file_name):
-        for invalid_id in InvalidId.get_all_in_interval(interval):
+        for invalid_id in get_all_invalid_ids_in_interval(interval):
             result += invalid_id
     return result
 
 
 def main():
-    print(part1("example.txt", expected_result=1227775554))
-    print(part1("input.txt", expected_result=19605500130))
-    print(part2("example.txt", expected_result=4174379265))
-    print(part2("input.txt", expected_result=36862281418))
+    part1("example.txt", expected_result=1227775554)
+    part1("input.txt", expected_result=19605500130)
+    part2("example.txt", expected_result=4174379265)
+    part2("input.txt", expected_result=36862281418)
 
 
 if __name__ == "__main__":
