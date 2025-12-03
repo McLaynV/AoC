@@ -1,0 +1,642 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://adventofcode.com/2025/day/1
+Subject: Day 1 - Advent of Code 2025
+Date: Wed, 3 Dec 2025 21:19:23 +0100
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--27uj5cFh09jSqXE2a6RYtuSOhAQBtPVvpscaNJZ29W----"
+
+
+------MultipartBoundary--27uj5cFh09jSqXE2a6RYtuSOhAQBtPVvpscaNJZ29W----
+Content-Type: text/html
+Content-ID: <frame-7753D7C7A1B7E5D1C94A7E8A72E124B7@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://adventofcode.com/2025/day/1
+
+<!DOCTYPE html><html lang=3D"en-us"><head><meta http-equiv=3D"Content-Type"=
+ content=3D"text/html; charset=3DUTF-8">
+
+<title>Day 1 - Advent of Code 2025</title>
+<link rel=3D"stylesheet" type=3D"text/css" href=3D"https://adventofcode.com=
+/static/style.css?32">
+<link rel=3D"stylesheet alternate" type=3D"text/css" href=3D"https://advent=
+ofcode.com/static/highcontrast.css?2" title=3D"High Contrast">
+<link rel=3D"shortcut icon" href=3D"https://adventofcode.com/favicon.png">
+
+</head><!--
+
+
+
+
+Oh, hello!  Funny seeing you here.
+
+I appreciate your enthusiasm, but you aren't going to find much down here.
+There certainly aren't clues to any of the puzzles.  The best surprises don=
+'t
+even appear in the source until you unlock them for real.
+
+Please be careful with automated requests; I'm not a massive company, and I=
+ can
+only take so much traffic.  Please be considerate so that everyone gets to =
+play.
+
+If you're curious about how Advent of Code works, it's running on some cust=
+om
+Perl code. Other than a few integrations (auth, analytics, social media), I
+built the whole thing myself, including the design, animations, prose, and =
+all
+of the puzzles.
+
+The puzzles are most of the work; preparing a new calendar and a new set of
+puzzles takes all of my free time for months every year. A lot of effort we=
+nt
+into building this thing - I hope you're enjoying playing it as much as I
+enjoyed making it for you!
+
+If you'd like to hang out, I'm @was.tl on Bluesky and @ericwastl@hachyderm.=
+io
+on Mastodon.
+
+- Eric Wastl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<body>
+<header><div><h1 class=3D"title-global"><a href=3D"https://adventofcode.com=
+/">Advent of Code</a></h1><nav><ul><li><a href=3D"https://adventofcode.com/=
+2025/about">[About]</a></li><li><a href=3D"https://adventofcode.com/2025/ev=
+ents">[Events]</a></li><li><a href=3D"https://cottonbureau.com/people/adven=
+t-of-code" target=3D"_blank">[Shop]</a></li><li><a href=3D"https://adventof=
+code.com/2025/settings">[Settings]</a></li><li><a href=3D"https://adventofc=
+ode.com/2025/auth/logout">[Log Out]</a></li></ul></nav><div class=3D"user">=
+McLaynV <span class=3D"star-count">4*</span></div></div><div><h1 class=3D"t=
+itle-event">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sp=
+an class=3D"title-event-wrap"></span><a href=3D"https://adventofcode.com/20=
+25">2025</a><span class=3D"title-event-wrap"></span></h1><nav><ul><li><a hr=
+ef=3D"https://adventofcode.com/2025">[Calendar]</a></li><li><a href=3D"http=
+s://adventofcode.com/2025/support">[AoC++]</a></li><li><a href=3D"https://a=
+dventofcode.com/2025/sponsors">[Sponsors]</a></li><li><a href=3D"https://ad=
+ventofcode.com/2025/leaderboard/private">[Leaderboards]</a></li><li><a href=
+=3D"https://adventofcode.com/2025/stats">[Stats]</a></li></ul></nav></div><=
+/header>
+
+<div id=3D"sidebar">
+<div id=3D"sponsor"><div class=3D"quiet">Our <a href=3D"https://adventofcod=
+e.com/2025/sponsors">sponsors</a> help make Advent of Code possible:</div><=
+div class=3D"sponsor"><a href=3D"https://adventofcode.com/2025/sponsors/red=
+irect?url=3Dhttps%3A%2F%2Fbmwtechworks%2Ein%2Fcareers%2F" target=3D"_blank"=
+ rel=3D"noopener">BMW TechWorks India</a> - Where coders become creators. S=
+hape software that drives the world. Are you ready?</div></div>
+</div><!--/sidebar-->
+
+<main>
+<article class=3D"day-desc"><h2>--- Day 1: Secret Entrance ---</h2><p>The E=
+lves have good news and bad news.</p>
+<p>The good news is that they've discovered <a href=3D"https://en.wikipedia=
+.org/wiki/Project_management" target=3D"_blank">project management</a>! Thi=
+s has given them the tools they need to prevent their usual Christmas emerg=
+ency. For example, they now know that the North Pole decorations need to be=
+ finished soon so that other critical tasks can start on time.</p>
+<p>The bad news is that they've realized they have a <em>different</em> eme=
+rgency: according to their resource planning, none of them have any time le=
+ft to decorate the North Pole!</p>
+<p>To save Christmas, the Elves need <em>you</em> to <em>finish decorating =
+the North Pole by December 12th</em>.</p>
+<p>Collect stars by solving puzzles.  Two puzzles will be made available on=
+ each day; the second puzzle is unlocked when you complete the first.  Each=
+ puzzle grants <em class=3D"star">one star</em>. Good luck!</p>
+<p>You arrive at the secret entrance to the North Pole base ready to start =
+decorating. Unfortunately, the <em>password</em> seems to have been changed=
+, so you can't get in. A document taped to the wall helpfully explains:</p>
+<p>"Due to new security protocols, the password is locked in the safe below=
+. Please see the attached document for the new combination."</p>
+<p>The safe has a dial with only an arrow on it; around the dial are the nu=
+mbers <code>0</code> through <code>99</code> in order. As you turn the dial=
+, it makes a small <em>click</em> noise as it reaches each number.</p>
+<p>The attached document (your puzzle input) contains a sequence of <em>rot=
+ations</em>, one per line, which tell you how to open the safe. A rotation =
+starts with an <code>L</code> or <code>R</code> which indicates whether the=
+ rotation should be to the <em>left</em> (toward lower numbers) or to the <=
+em>right</em> (toward higher numbers). Then, the rotation has a <em>distanc=
+e</em> value which indicates how many clicks the dial should be rotated in =
+that direction.</p>
+<p>So, if the dial were pointing at <code>11</code>, a rotation of <code>R8=
+</code> would cause the dial to point at <code>19</code>. After that, a rot=
+ation of <code>L19</code> would cause it to point at <code>0</code>.</p>
+<p>Because the dial is a circle, turning the dial <em>left from <code>0</co=
+de></em> one click makes it point at <code>99</code>. Similarly, turning th=
+e dial <em>right from <code>99</code></em> one click makes it point at <cod=
+e>0</code>.</p>
+<p>So, if the dial were pointing at <code>5</code>, a rotation of <code>L10=
+</code> would cause it to point at <code>95</code>. After that, a rotation =
+of <code>R5</code> could cause it to point at <code>0</code>.</p>
+<p>The dial starts by pointing at <code>50</code>.</p>
+<p>You could follow the instructions, but your recent required official Nor=
+th Pole secret entrance security training seminar taught you that the safe =
+is actually a decoy. The actual password is <em>the number of times the dia=
+l is left pointing at <code>0</code> after any rotation in the sequence</em=
+>.</p>
+<p>For example, suppose the attached document contained the following rotat=
+ions:</p>
+<pre><code>L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82
+</code></pre>
+<p>Following these rotations would cause the dial to move as follows:</p>
+<ul>
+<li>The dial starts by pointing at <code>50</code>.</li>
+<li>The dial is rotated <code>L68</code> to point at <code>82</code>.</li>
+<li>The dial is rotated <code>L30</code> to point at <code>52</code>.</li>
+<li>The dial is rotated <code>R48</code> to point at <code><em>0</em></code=
+>.</li>
+<li>The dial is rotated <code>L5</code> to point at <code>95</code>.</li>
+<li>The dial is rotated <code>R60</code> to point at <code>55</code>.</li>
+<li>The dial is rotated <code>L55</code> to point at <code><em>0</em></code=
+>.</li>
+<li>The dial is rotated <code>L1</code> to point at <code>99</code>.</li>
+<li>The dial is rotated <code>L99</code> to point at <code><em>0</em></code=
+>.</li>
+<li>The dial is rotated <code>R14</code> to point at <code>14</code>.</li>
+<li>The dial is rotated <code>L82</code> to point at <code>32</code>.</li>
+</ul>
+<p>Because the dial points at <code>0</code> a total of three times during =
+this process, the password in this example is <code><em>3</em></code>.</p>
+<p>Analyze the rotations in your attached document. <em>What's the actual p=
+assword to open the door?</em></p>
+</article>
+<p>Your puzzle answer was <code>1043</code>.</p><article class=3D"day-desc"=
+><h2 id=3D"part2">--- Part Two ---</h2><p>You're sure that's the right pass=
+word, but the door won't open. You knock, but nobody answers. You build a s=
+nowman while you think.</p>
+<p>As you're rolling the snowballs for your snowman, you find another secur=
+ity document that must have fallen into the snow:</p>
+<p>"Due to newer security protocols, please use <em>password method <span t=
+itle=3D"You should have seen the chaos when the Elves overflowed their 32-b=
+it password method counter.">0x434C49434B</span></em> until further notice.=
+"</p>
+<p>You remember from the training seminar that "method 0x434C49434B" means =
+you're actually supposed to count the number of times <em>any click</em> ca=
+uses the dial to point at <code>0</code>, regardless of whether it happens =
+during a rotation or at the end of one.</p>
+<p>Following the same rotations as in the above example, the dial points at=
+ zero a few extra times during its rotations:</p>
+<ul>
+<li>The dial starts by pointing at <code>50</code>.</li>
+<li>The dial is rotated <code>L68</code> to point at <code>82</code>; durin=
+g this rotation, it points at <code>0</code> <em>once</em>.</li>
+<li>The dial is rotated <code>L30</code> to point at <code>52</code>.</li>
+<li>The dial is rotated <code>R48</code> to point at <code><em>0</em></code=
+>.</li>
+<li>The dial is rotated <code>L5</code> to point at <code>95</code>.</li>
+<li>The dial is rotated <code>R60</code> to point at <code>55</code>; durin=
+g this rotation, it points at <code>0</code> <em>once</em>.</li>
+<li>The dial is rotated <code>L55</code> to point at <code><em>0</em></code=
+>.</li>
+<li>The dial is rotated <code>L1</code> to point at <code>99</code>.</li>
+<li>The dial is rotated <code>L99</code> to point at <code><em>0</em></code=
+>.</li>
+<li>The dial is rotated <code>R14</code> to point at <code>14</code>.</li>
+<li>The dial is rotated <code>L82</code> to point at <code>32</code>; durin=
+g this rotation, it points at <code>0</code> <em>once</em>.</li>
+</ul>
+<p>In this example, the dial points at <code>0</code> three times at the en=
+d of a rotation, plus three more times during a rotation. So, in this examp=
+le, the new password would be <code><em>6</em></code>.</p>
+<p>Be careful: if the dial were pointing at <code>50</code>, a single rotat=
+ion like <code>R1000</code> would cause the dial to point at <code>0</code>=
+ ten times before returning back to <code>50</code>!</p>
+<p>Using password method 0x434C49434B, <em>what is the password to open the=
+ door?</em></p>
+</article>
+<p>Your puzzle answer was <code>5963</code>.</p><p class=3D"day-success">Bo=
+th parts of this puzzle are complete! They provide two gold stars: **</p>
+<p>At this point, you should <a href=3D"https://adventofcode.com/2025">retu=
+rn to your Advent calendar</a> and try another puzzle.</p>
+<p>If you still want to see it, you can <a href=3D"https://adventofcode.com=
+/2025/day/1/input" target=3D"_blank">get your puzzle input</a>.</p>
+<p>You can also <span class=3D"share">[Share<span class=3D"share-content">o=
+n
+  <a href=3D"https://bsky.app/intent/compose?text=3DI%27ve+completed+%22Sec=
+ret+Entrance%22+%2D+Day+1+%2D+Advent+of+Code+2025+%23AdventOfCode+https%3A%=
+2F%2Fadventofcode%2Ecom%2F2025%2Fday%2F1" target=3D"_blank">Bluesky</a>
+  <a href=3D"https://twitter.com/intent/tweet?text=3DI%27ve+completed+%22Se=
+cret+Entrance%22+%2D+Day+1+%2D+Advent+of+Code+2025&amp;url=3Dhttps%3A%2F%2F=
+adventofcode%2Ecom%2F2025%2Fday%2F1&amp;related=3Dericwastl&amp;hashtags=3D=
+AdventOfCode" target=3D"_blank">Twitter</a>
+  <a target=3D"_blank">Mastodon</a></span>]</span> this puzzle.</p>
+</main>
+
+<!-- ga -->
+
+<!-- /ga -->
+
+</body></html>
+------MultipartBoundary--27uj5cFh09jSqXE2a6RYtuSOhAQBtPVvpscaNJZ29W----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://adventofcode.com/static/highcontrast.css?2
+
+@charset "utf-8";
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("SourceCodePro-400.woff") format("woff"); }
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 900; src: url("SourceCodePro-900.woff") format("woff"); }
+
+* { background: transparent !important; color: black !important; text-shado=
+w: none !important; }
+
+body { background: white !important; font-weight: 400 !important; }
+
+article [title] { border-bottom-color: black !important; }
+
+a { color: rgb(0, 0, 255) !important; text-decoration: underline !important=
+; }
+
+em { font-weight: 900 !important; }
+
+code::before { background: transparent !important; border-color: black !imp=
+ortant; }
+
+.stats-firstonly { opacity: 0.5; }
+
+.privboard-star-firstonly { opacity: 0.667; }
+
+.privboard-star-unlocked { opacity: 0.333; }
+------MultipartBoundary--27uj5cFh09jSqXE2a6RYtuSOhAQBtPVvpscaNJZ29W----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://adventofcode.com/static/style.css?32
+
+@charset "utf-8";
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 300; src: url("SourceCodePro-300.woff") format("woff"); }
+
+body { background: rgb(15, 15, 35); color: rgb(204, 204, 204); font-family:=
+ "Source Code Pro", monospace; font-weight: 300; font-size: 14pt; min-width=
+: 60em; }
+
+img { border: 0px; }
+
+a { outline: 0px; }
+
+main, figure, figcaption { display: block; }
+
+pre, code { font-family: "Source Code Pro", monospace; }
+
+header, main { text-size-adjust: none; }
+
+a { text-decoration: none; color: rgb(0, 153, 0); }
+
+a:hover, a:focus { color: rgb(153, 255, 153); }
+
+h1, h2 { font-size: 1em; font-weight: normal; }
+
+code { position: relative; display: inline-block; margin: 0px; padding: 0px=
+; }
+
+code::before { z-index: -1; content: ""; position: absolute; display: block=
+; inset: 3px -2px 0px; border: 1px solid rgb(51, 51, 64); background: rgb(1=
+6, 16, 26); }
+
+pre.wrap { max-width: 100%; white-space: pre-wrap; }
+
+.quiet { opacity: 0.5; }
+
+p.wrap { width: 45em; }
+
+.hidden-until-hover { border: 1px dotted gray; overflow: hidden; position: =
+relative; padding: 0px 0.5em; transition: border-color linear 5s; }
+
+.hidden-until-hover::before { content: "(hover to reveal)"; position: absol=
+ute; opacity: 0.5; text-align: center; left: 0px; top: 0px; width: 100%; ov=
+erflow: hidden; transition: width linear 5s; }
+
+.hidden-until-hover > * { visibility: hidden; transition: visibility linear=
+ 5s; }
+
+.hidden-until-hover:hover { transition: border-color linear 1s; border-colo=
+r: transparent; }
+
+.hidden-until-hover:hover::before { content: "( keep hovering )"; transitio=
+n: width linear 1s; width: 0px; }
+
+.hidden-until-hover:hover > * { transition: visibility linear 1s; visibilit=
+y: visible; }
+
+.warning:not(.warning-active) { transition: color 1s, opacity 1s; }
+
+.warning-active { color: rgb(255, 0, 0); opacity: 1; }
+
+.star-count { color: rgb(255, 255, 102); }
+
+.supporter-badge { color: rgb(255, 255, 102); }
+
+a.supporter-badge:hover, a.supporter-badge:focus { text-decoration: none; c=
+olor: rgb(255, 255, 204); text-shadow: rgb(255, 255, 102) 0px 0px 5px; }
+
+.sponsor-badge { color: rgb(121, 162, 216); }
+
+a.sponsor-badge:hover, a.sponsor-badge:focus { text-decoration: none; color=
+: rgb(204, 219, 237); text-shadow: rgb(121, 162, 216) 0px 0px 5px; }
+
+#sidebar { width: 200px; float: right; margin: 0px 15px 2em 2em; position: =
+relative; z-index: 10; }
+
+#sponsor { margin-bottom: 2.5em; }
+
+header { white-space: nowrap; cursor: default; z-index: 100; margin-bottom:=
+ 2em; }
+
+header h1 { display: inline-block; margin: 0px; padding-right: 1em; }
+
+header h1 a, header h1 span { display: inline-block; text-decoration: none;=
+ color: rgb(0, 204, 0); text-shadow: rgb(0, 204, 0) 0px 0px 2px, rgb(0, 204=
+, 0) 0px 0px 5px; }
+
+header h1 a:hover, header h1 a:focus { color: rgb(153, 255, 153); text-shad=
+ow: rgb(153, 255, 153) 0px 0px 2px, rgb(153, 255, 153) 0px 0px 5px; }
+
+header h1.title-event .title-event-wrap { opacity: 0.33; white-space: pre; =
+}
+
+header .user { display: inline-block; padding-left: 1em; }
+
+header nav { display: inline-block; }
+
+header nav ul { list-style-type: none; padding: 0px; margin: 0px; display: =
+inline-block; }
+
+header nav li { display: inline-block; padding: 0px 0.6em; }
+
+header nav a { display: inline-block; text-decoration: none; outline: none;=
+ }
+
+input[type=3D"text"], textarea { color: inherit; border: 1px solid rgb(102,=
+ 102, 102); background: rgb(16, 16, 26); padding: 0px 2px; font-family: inh=
+erit; font-size: inherit; margin: 0px; }
+
+textarea { vertical-align: top; }
+
+label img { vertical-align: bottom; position: relative; top: -3px; margin-r=
+ight: 0.3em; }
+
+input[type=3D"radio"] { display: none; }
+
+input[type=3D"radio"] ~ span { cursor: pointer; display: inline-block; }
+
+input[type=3D"radio"] ~ span::before { content: "( ) "; }
+
+input[type=3D"radio"] ~ span:hover, input[type=3D"radio"] ~ span:focus { ba=
+ckground-color: rgb(25, 25, 59); }
+
+input[type=3D"radio"]:checked ~ span { color: rgb(255, 255, 255); }
+
+input[type=3D"radio"]:checked ~ span::before { content: "(O) "; }
+
+input[type=3D"checkbox"] { display: none; }
+
+input[type=3D"checkbox"] ~ span { cursor: pointer; display: inline-block; }
+
+input[type=3D"checkbox"] ~ span::before { content: "[ ] "; }
+
+input[type=3D"checkbox"] ~ span:hover, input[type=3D"checkbox"] ~ span:focu=
+s { background-color: rgb(25, 25, 59); }
+
+input[type=3D"checkbox"]:checked ~ span { color: rgb(255, 255, 255); }
+
+input[type=3D"checkbox"]:checked ~ span::before { content: "[X] "; }
+
+input[type=3D"checkbox"]:disabled ~ span { opacity: 0.3; cursor: default; }
+
+input[type=3D"checkbox"]:disabled ~ span::before { content: "[-] "; }
+
+input[type=3D"checkbox"]:disabled ~ span:hover { background-color: transpar=
+ent; }
+
+input[type=3D"submit"] { background: transparent; border: 0px; font-family:=
+ inherit; font-size: inherit; margin: 0px; padding: 0px; color: rgb(0, 153,=
+ 0); cursor: pointer; }
+
+input[type=3D"submit"]:hover, input[type=3D"submit"]:focus { color: rgb(153=
+, 255, 153); }
+
+article { width: 45em; margin-bottom: 2em; margin-top: 2em; }
+
+article:first-of-type { margin-top: 0px; }
+
+article h2 { color: rgb(255, 255, 255); margin-top: 1em; margin-bottom: 1em=
+; white-space: nowrap; }
+
+article h2 + * { margin-top: 0px; }
+
+article em { color: rgb(255, 255, 255); font-style: normal; text-shadow: rg=
+b(255, 255, 255) 0px 0px 5px; }
+
+article em.star { color: rgb(255, 255, 102); font-style: normal; text-shado=
+w: rgb(255, 255, 102) 0px 0px 5px; }
+
+article a { white-space: nowrap; }
+
+article .aside { opacity: 0.6; }
+
+article ul { list-style-type: none; padding: 0px; }
+
+article li { padding-left: 2.5em; position: relative; }
+
+article li::before { content: "=C2=A0=C2=A0-=C2=A0"; position: absolute; le=
+ft: 0px; top: 0px; }
+
+.day-success { color: rgb(255, 255, 102); text-shadow: rgb(255, 255, 102) 0=
+px 0px 5px; }
+
+form#settings input[type=3D"radio"] ~ span { min-width: 30em; }
+
+form#settings input[type=3D"checkbox"] ~ span { min-width: 30em; }
+
+.share { color: rgb(0, 153, 0); cursor: default; transition: color 0.2s 1s;=
+ }
+
+.share:hover, .share:focus-within { color: rgb(170, 255, 170); transition: =
+color 0.2s; }
+
+.share .share-content { display: inline-block; vertical-align: text-bottom;=
+ white-space: nowrap; overflow: hidden; max-width: 0px; transition: max-wid=
+th 0.2s 1s; }
+
+.share .share-content::before { content: "=C2=A0"; }
+
+.share .share-content::after { }
+
+.share:hover .share-content, .share:focus-within .share-content { max-width=
+: 45em; transition: max-width 0.2s; }
+
+.puzzle-input { border: 1px solid rgb(153, 153, 153); background: rgb(51, 5=
+1, 51); color: rgb(255, 255, 255); text-shadow: rgb(255, 255, 255) 0px 0px =
+5px; }
+
+.calendar { cursor: default; user-select: none; }
+
+.calendar > span { color: rgb(51, 51, 51); }
+
+.calendar > a { text-decoration: none; color: rgb(102, 102, 102); outline: =
+none; cursor: default; }
+
+.calendar a:hover, .calendar a:focus { background-color: rgba(119, 119, 165=
+, 0.2); cursor: pointer; }
+
+#calendar-countdown { padding-left: 0.5em; color: rgb(204, 204, 204); }
+
+.calendar .calendar-day { color: rgb(102, 102, 102); }
+
+.calendar a .calendar-day { color: rgb(204, 204, 204); }
+
+.calendar a .calendar-mark-complete, .calendar a .calendar-mark-verycomplet=
+e { visibility: hidden; }
+
+.calendar a.calendar-complete .calendar-mark-complete, .calendar a.calendar=
+-verycomplete .calendar-mark-complete { visibility: visible; color: rgb(255=
+, 255, 102); }
+
+.calendar a.calendar-verycomplete .calendar-mark-verycomplete { visibility:=
+ visible; color: rgb(255, 255, 102); }
+
+.calendar .calendar-day-new { animation: 5s ease 0s 1 normal none running a=
+nim-day-new; }
+
+.calendar .calendar-day-new .calendar-day { animation: 5s ease 0s 1 normal =
+none running anim-day-new-day; }
+
+@keyframes anim-day-new {=20
+  0% { color: rgb(51, 51, 51); text-shadow: transparent 0px 0px 5px; }
+  25% { color: rgb(255, 255, 255); text-shadow: rgb(255, 255, 255) 0px 0px =
+5px; }
+  100% { color: rgb(102, 102, 102); text-shadow: transparent 0px 0px 5px; }
+}
+
+@keyframes anim-day-new-day {=20
+  0% { color: rgb(102, 102, 102); text-shadow: transparent 0px 0px 5px; }
+  25% { color: rgb(255, 255, 255); text-shadow: rgb(255, 255, 255) 0px 0px =
+5px; }
+  100% { color: rgb(204, 204, 204); text-shadow: transparent 0px 0px 5px; }
+}
+
+.eventlist-event { white-space: pre; }
+
+.stats > span, .stats > span .stats-firstonly, .stats > span .stats-both { =
+color: rgb(102, 102, 102); }
+
+.stats > a { color: rgb(204, 204, 204); min-width: 35em; display: inline-bl=
+ock; }
+
+.stats > a:hover, .stats > a:focus { background-color: rgb(30, 30, 70); }
+
+.stats-firstonly { color: rgb(153, 153, 204); }
+
+.stats-both { color: rgb(255, 255, 102); }
+
+.leaderboard-daylinks { cursor: default; }
+
+.leaderboard-daylinks-selected { color: rgb(255, 255, 255); text-shadow: rg=
+b(255, 255, 255) 0px 0px 5px; }
+
+.leaderboard-daydesc-first { color: rgb(153, 153, 204); }
+
+.leaderboard-daydesc-both { color: rgb(255, 255, 102); }
+
+.leaderboard-entry { white-space: pre; }
+
+.leaderboard-entry .leaderboard-totalscore { color: rgb(255, 255, 255); }
+
+.leaderboard-anon { opacity: 0.6; }
+
+.leaderboard-userphoto { display: inline-block; height: 20px; width: 20px; =
+margin: 0px 0.5em; text-align: center; }
+
+.leaderboard-userphoto img { height: 20px; max-width: 20px; vertical-align:=
+ middle; position: relative; top: -2px; }
+
+.leaderboard-time { opacity: 0.5; }
+
+.privboard-row { white-space: pre; }
+
+.privboard-name { vertical-align: text-bottom; }
+
+.privboard-days > span { display: inline-block; color: rgb(51, 51, 51); }
+
+.privboard-days > a { display: inline-block; }
+
+.privboard-star-locked { visibility: hidden; }
+
+.privboard-star-unlocked { color: rgb(51, 51, 51); }
+
+.privboard-star-firstonly { color: rgb(153, 153, 204); }
+
+.privboard-star-both { color: rgb(255, 255, 102); }
+
+.privboard-delbtn { opacity: 0.33; }
+
+.privboard-row:hover .privboard-delbtn { opacity: 1; }
+
+.sponsors { width: 46em; }
+
+.sponsor { margin: 1em 0px; }
+------MultipartBoundary--27uj5cFh09jSqXE2a6RYtuSOhAQBtPVvpscaNJZ29W------
