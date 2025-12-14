@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from functools import cached_property, cache
+from functools import cache
 
 from expectations_check import validate_result
 
@@ -24,14 +24,6 @@ class DevicesPile[DeviceType](dict[str, DeviceType]):
                 return
             raise KeyError(f"Device '{device.name}' already exists.")
         self[device.name] = device
-
-    @cached_property
-    def start(self) -> DeviceType:
-        return self["you"]
-
-    @cached_property
-    def end(self) -> DeviceType:
-        return self["out"]
 
 
 @dataclass(frozen=True)
@@ -56,12 +48,14 @@ def load_from_file(file_name: str) -> DevicesPile[ConnectedDevice]:
         for line in f:
             device = Device.parse(line)
             loaded_devices.add_device(device)
+
     all_device_names = set(
         device_name
         for device_name in loaded_devices
     )
     for device in loaded_devices.values():
         all_device_names |= set(device.outputs_to)
+
     connected_devices: DevicesPile[ConnectedDevice] = DevicesPile[ConnectedDevice]()
     for device_name in all_device_names:
         connected_devices.add_device(ConnectedDevice(device_name))
@@ -89,12 +83,30 @@ def count_paths(start_device: ConnectedDevice, target_device: ConnectedDevice) -
 @validate_result
 def part1(file_name: str):
     devices_pile = load_from_file(file_name)
-    return count_paths(devices_pile.start, devices_pile.end)
+    return count_paths(devices_pile["you"], devices_pile["out"])
+
+
+@validate_result
+def part2(file_name: str):
+    devices_pile = load_from_file(file_name)
+
+    count_paths_svr_fft = count_paths(devices_pile["svr"], devices_pile["fft"])
+    count_paths_svr_dac = count_paths(devices_pile["svr"], devices_pile["dac"])
+    count_paths_dac_fft = count_paths(devices_pile["dac"], devices_pile["fft"])
+    count_paths_fft_dac = count_paths(devices_pile["fft"], devices_pile["dac"])
+    count_paths_dac_out = count_paths(devices_pile["dac"], devices_pile["out"])
+    count_paths_fft_out = count_paths(devices_pile["fft"], devices_pile["out"])
+    
+    count_paths_svr_fft_dac_out = count_paths_svr_fft * count_paths_fft_dac * count_paths_dac_out
+    count_paths_svr_dac_fft_out = count_paths_svr_dac * count_paths_dac_fft * count_paths_fft_out
+    return count_paths_svr_fft_dac_out + count_paths_svr_dac_fft_out
 
 
 def main():
-    part1("example.txt", expected_result=5)
+    part1("example1.txt", expected_result=5)
     part1("input.txt", expected_result=607)
+    part2("example2.txt", expected_result=2)
+    part2("input.txt", expected_result=506264456238938)
 
 
 if __name__ == "__main__":
