@@ -96,7 +96,7 @@ def part2(file_name: str):
     count_paths_fft_dac = count_paths(devices_pile["fft"], devices_pile["dac"])
     count_paths_dac_out = count_paths(devices_pile["dac"], devices_pile["out"])
     count_paths_fft_out = count_paths(devices_pile["fft"], devices_pile["out"])
-    
+
     count_paths_svr_fft_dac_out = count_paths_svr_fft * count_paths_fft_dac * count_paths_dac_out
     count_paths_svr_dac_fft_out = count_paths_svr_dac * count_paths_dac_fft * count_paths_fft_out
     return count_paths_svr_fft_dac_out + count_paths_svr_dac_fft_out

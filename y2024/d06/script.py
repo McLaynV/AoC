@@ -13,33 +13,29 @@ class LabPlace(StrEnum):
     EMPTY = "."
     START = "^"
 
-    @staticmethod
-    def parse_lab_tile(tile_character: str) -> LabPlace:
-        for option in LabPlace:
-            if option.value == tile_character:
-                return option
-        raise ValueError(f"Unexpected tile character: {tile_character}")
-
 
 @dataclass
-class LabTile(Tile):
-    lab_place: LabPlace
+class LabTile(Tile[LabPlace]):
     _visited_directions_main: set[DirectionUnit] = field(default_factory=set)
     _visited_directions_loop_check: set[DirectionUnit] = field(default_factory=set)
 
     def clean_loop_search(self) -> None:
         self._visited_directions_loop_check.clear()
 
+    @classmethod
+    def representation_from_string(cls, value: str) -> LabPlace:
+        return LabPlace(value)
+
     @staticmethod
     def get_lab_location(tile_character: str) -> LabTile:
-        return LabTile(lab_place=LabPlace.parse_lab_tile(tile_character))
+        return LabTile.get_new(tile_character)
 
     @property
     def visited(self) -> bool:
         return (len(self._visited_directions_main) > 0) or (len(self._visited_directions_loop_check) > 0)
 
     def __repr__(self) -> str:
-        return "O" if self.visited else self.lab_place.value
+        return "O" if self.visited else self.representation.value
 
     def visit(
             self,
@@ -55,10 +51,6 @@ class LabTile(Tile):
         return (direction in self._visited_directions_main) or (direction in self._visited_directions_loop_check)
 
 
-class LabMap(Map[LabTile]):
-    pass
-
-
 class EndStatus(Enum):
     EXITED = 0
     LOOPED = 1
@@ -69,9 +61,9 @@ def part_1(
         file_name: str,
 ) -> int | None:
     # load the map, get start coordinates
-    lab = LabMap.load_from_file(file_name, LabTile.get_lab_location)
-    current_coordinates = lab.find_first_item_by_criteria(lambda x: x.lab_place == LabPlace.START)
-    lab[current_coordinates].lab_place = LabPlace.EMPTY
+    lab = Map[LabTile].load_from_file(file_name, LabTile.get_lab_location)
+    current_coordinates = lab.find_first_item_by_criteria(lambda x: x.representation == LabPlace.START)
+    lab[current_coordinates].representation = LabPlace.EMPTY
     direction = DirectionUnit.UP
     lab[current_coordinates].visit(direction)
 
@@ -81,7 +73,7 @@ def part_1(
 
 
 def walk_the_map(
-        lab: LabMap,
+        lab: Map[LabTile],
         current_coordinates: Coordinates,
         direction: DirectionUnit,
         checking_for_loops: bool = False,
@@ -91,7 +83,7 @@ def walk_the_map(
         next_coordinates = current_coordinates + direction
         if not lab.contains_coordinates(next_coordinates):
             break
-        if lab[next_coordinates].lab_place == LabPlace.BLOCK:
+        if lab[next_coordinates].representation == LabPlace.BLOCK:
             direction = direction.turn_right()
             continue
         if lab[next_coordinates].has_visited(direction):
@@ -105,9 +97,9 @@ def part_2(
         file_name: str,
 ) -> int:
     # load the map, get start coordinates
-    lab = LabMap.load_from_file(file_name, LabTile.get_lab_location)
-    current_coordinates = lab.find_first_item_by_criteria(lambda x: x.lab_place == LabPlace.START)
-    lab[current_coordinates].lab_place = LabPlace.EMPTY
+    lab = Map[LabTile].load_from_file(file_name, LabTile.get_lab_location)
+    current_coordinates = lab.find_first_item_by_criteria(lambda x: x.representation == LabPlace.START)
+    lab[current_coordinates].representation = LabPlace.EMPTY
     direction = DirectionUnit.UP
     lab[current_coordinates].visit(direction)
 
@@ -119,19 +111,19 @@ def part_2(
         next_coordinates = current_coordinates + direction
         if not lab.contains_coordinates(next_coordinates):
             break
-        if lab[next_coordinates].lab_place == LabPlace.BLOCK:
+        if lab[next_coordinates].representation == LabPlace.BLOCK:
             direction = direction.turn_right()
             continue
-        if lab[next_coordinates].lab_place == LabPlace.EMPTY:
+        if lab[next_coordinates].representation == LabPlace.EMPTY:
             if not lab[next_coordinates].visited:
                 # lab_copy = deepcopy(lab)  # this takes too long
-                lab[next_coordinates].lab_place = LabPlace.BLOCK
+                lab[next_coordinates].representation = LabPlace.BLOCK
                 if walk_the_map(lab, current_coordinates, direction, True) == EndStatus.LOOPED:
                     loop_count += 1
                 # clean up:
                 for tile in lab.all_tiles():
                     tile.clean_loop_search()
-                lab[next_coordinates].lab_place = LabPlace.EMPTY
+                lab[next_coordinates].representation = LabPlace.EMPTY
         current_coordinates = next_coordinates
 
     return loop_count
