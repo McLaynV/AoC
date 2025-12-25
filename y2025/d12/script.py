@@ -140,22 +140,22 @@ class RegionDefinition:
         return needed_size <= self.width * self.length
 
 
+@cache
+def sum_coordinates(shape_coordinates: Coordinates, offset: Direction) -> Coordinates:
+    return shape_coordinates + offset
+
+
 class Region(Map[PresentTile]):
     def can_put(self, offset: Direction, shape: PresentRotation) -> bool:
         for shape_coordinates in get_coordinates_of_shape(shape.frozen):
-            offset_coordinates = self.sum_coordinates(shape_coordinates, offset)
+            offset_coordinates = sum_coordinates(shape_coordinates, offset)
             if bool(self[offset_coordinates]):
                 return False
         return True
 
-    @staticmethod
-    @cache
-    def sum_coordinates(shape_coordinates: Coordinates, offset: Direction) -> Coordinates:
-        return shape_coordinates + offset
-
     def change(self, offset: Direction, shape: PresentRotation, new_value: PresentTile) -> None:
         for shape_coordinates in get_coordinates_of_shape(shape.frozen):
-            offset_coordinates = self.sum_coordinates(shape_coordinates, offset)
+            offset_coordinates = sum_coordinates(shape_coordinates, offset)
             self[offset_coordinates] = new_value
 
     def put_present(self, offset: Direction, shape: PresentRotation) -> None:
